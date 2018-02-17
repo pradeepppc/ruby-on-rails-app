@@ -1,0 +1,17 @@
+<div class="jumbotron">
+
+	<%= params[:notice] %>
+	<% if logged_in? %>
+		<% c_user = current_user %>
+		<% if c_user != nil%>
+		<h1>This is your home page <%= c_user.name %></h1>
+		
+		<% end %>
+	<% else %>
+	<h1>Welcome ! </h1>
+		<h3>Play the exciting quiz by logging in</h3>
+		<br>
+			<h3>If you are new user just signup and play the game </h3>
+		
+	<% end %>
+</div>

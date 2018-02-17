@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Myapp</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  	<nav class="navbar navbar-inverse navbar-fixed-top">
+  		<div class="container">
+  			<div class="navbar-header">
+  				<%= link_to 'Rails my app' , '#' ,class: 'navbar-brand' %>
+  				
+  			</div>
+  			<div class="collapse navbar-collapse">
+  				<ul class="nav navbar-nav navbar-right">
+            <% user = current_user %>
+            <% if logged_in? %>
+            <% if user.id != 1%>
+  					<li><%= link_to 'Home' ,root_path %></li>
+            <% end %>
+            <% else %>
+            <li><%= link_to 'Home' ,root_path %></li>
+            <% end %>
+  					<% if !logged_in? %> 
+  						<li><%= link_to 'Log in' , login_path %></li>
+  						<li><%= link_to 'Register', user_new_path %></li> 
+  					<% else %>
+  						<li><%= link_to 'Profile',profile_path %></li> 
+  						<li><%= link_to 'Logout' ,logout_path, method: :delete %></li>
+              <li><%= link_to 'game play' ,generes_path %></li>
+
+  						
+  						<% if user.id == 1 %>
+							<li><%= link_to 'all users' , user_list_path %></li>
+              <li><%= link_to 'Home', '/admin'%></li>
+						<% end %>  
+  					<% end %>	
+
+  				</ul>
+
+  			</div>
+
+  		</div>
+
+  	</nav>
+<div class="container">
+	<% flash.each do |type,message| %>
+	<div class="alert alert-<%= type %>"><%= message %>
+		
+	</div>
+	<% end %>
+<%= yield %>
+</div>
+    
+  </body>
+</html>

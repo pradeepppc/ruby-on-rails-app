@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ques: MyText
+  opa: MyString
+  opb: MyString
+  opc: MyString
+  opd: MyString
+  ans: MyString
+  subgenere: one
+
+two:
+  ques: MyText
+  opa: MyString
+  opb: MyString
+  opc: MyString
+  opd: MyString
+  ans: MyString
+  subgenere: two

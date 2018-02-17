@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 well" >
+<%= form_with(model: question, local: true) do |form| %>
+  <% if question.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+      <ul>
+      <% question.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :question %>
+    <%= form.text_area :ques, id: :question_ques %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :optionA %>
+    <%= form.text_field :opa, id: :question_opa %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :optionB %>
+    <%= form.text_field :opb, id: :question_opb %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :optionC %>
+    <%= form.text_field :opc, id: :question_opc %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :optionD %>
+    <%= form.text_field :opd, id: :question_opd %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :answer %>
+    <%= form.text_field :ans, id: :question_ans %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+</div>
+</div>

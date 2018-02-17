@@ -1,0 +1,19 @@
+<div class="row">
+	<div class="col-md-12">
+		<h1 class="text-center">Profile</h1>
+
+		<% user = current_user %>
+		<table class="table table-condensed table-hover">
+			<tr class="danger">
+				<th>Name</th>
+				<td><%= user.name %></td>
+			</tr>
+			<tr class="danger">
+				<th>Email</th>
+				<td><%= user.email %></td>
+			</tr>
+		</table>
+
+	</div>
+
+</div>

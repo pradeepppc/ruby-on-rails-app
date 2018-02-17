@@ -1,0 +1,119 @@
+<p id="notice"><%= notice %></p>
+<% c_user = current_user %>
+<% if @scor  != nil %>
+    <h1 class="text-center">Your score in this quiz is <%= @scor.score %> </h1>
+<% end %>
+<h1 class="text-center">Questions</h1>
+
+
+    <% fk = 0 %>
+    <% @questions.each do |question| %>
+        <% flag = 0 %>
+        <% @userans.each do |us| %>
+            <% if us.question_id == question.id %>
+                <% flag = 1 %>
+            <% end %>
+        <% end %>
+        <% if flag == 0 %>
+            <% fk = 1 %>
+            <div class="container-fluid"> 
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-condensed table-hover">
+            <%= form_tag({controller: "questions" , action: "check"}, method: "post") do %>
+                <p6 ><%= text_field_tag(:qid,question.id,{:readonly => true}) %></p6>
+                <tr class="danger"><h3><%= question.ques %></h3></tr>
+                <tr class="danger">
+                <td><%= check_box_tag(:opa) %></td> 
+                <td><%= label_tag(:opa , question.opa,:class => "checkbox inline") %></td>
+                </tr>
+                <tr class="danger">                 
+                <td><%= check_box_tag(:opb) %></td>
+                <td><%= label_tag(:opb , question.opb,:class => "checkbox inline") %></td>
+                </tr>
+                <tr class="danger">
+                <td>
+                <%= check_box_tag(:opc) %></td>
+                <td>
+                <%= label_tag(:opc , question.opc , :class => "checkbox inline") %>
+                </td></tr><tr class="danger"><td>
+                <%= check_box_tag(:opd) %></td><td>
+                <%= label_tag(:opd , question.opd , :class => "checkbox inline") %>
+            </td>
+            </tr>
+            <br>
+            </table>
+            <%= submit_tag("submit" , :class => "btn btn-success") %>
+            </div>
+            </div>
+            </div>
+            <% end %>
+        <% end %>
+            <% if flag == 1 %>
+            <% ansss = Useran.find_by(user_id: current_user.id , question_id: question.id)%>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-condensed table-hover">
+                <tr class="danger"><td>Question: <%= question.ques %></td></td></tr>
+                <% if question.opa == question.ans %>
+                <% if ansss.comp == 1 %>
+                <tr class="success"><td>OptionA: <%= question.opa %></td></tr>
+                <% else %>
+                <tr class="info"><td>OptionA: <%= question.opa %></td></tr>
+                <% end %>
+                <% else %>
+                <tr class="danger"><td>OptionA: <%= question.opa %></td></tr>
+                <% end %>
+
+                <% if question.opb == question.ans %>
+                <% if ansss.comp == 1 %>
+                <tr class="success"><td>OptionB: <%= question.opb %></td></tr>
+                <% else %>
+                <tr class="info"><td>OptionB: <%= question.opb %></td></tr>
+                <% end %>
+
+                <% else %>
+                <tr class="danger"><td>OptionB: <%= question.opb %></td></tr>
+                <% end %>
+
+                <% if question.opc == question.ans %>
+                <% if ansss.comp == 1 %>
+                <tr class="success"><td>OptionC: <%= question.opc %></td></tr>
+                <% else %>
+                <tr class="info"><td>OptionC: <%= question.opc %></td></tr>
+                <% end %>              
+                <% else %>
+                <tr class="danger"><td>OptionC: <%= question.opc %></td></tr>
+                <% end %>
+
+                <% if question.opd == question.ans %>
+                <% if ansss.comp == 1 %>
+                <tr class="success"><td>OptionD: <%= question.opd %></td></tr>
+                <% else %>
+                <tr class="info"><td>OptionD: <%= question.opd %></td></tr>
+                <% end %>
+                <% else %>
+                <tr class="danger"><td>OptionD: <%= question.opd %></td></tr>
+                <% end %>
+
+                </table>
+                </div>
+                </div>
+                </div>
+            <% end %>
+            <% if c_user.id == 1 %>
+            <h3 class="text-center"><%= link_to 'Show', question %></h3>
+            <h3 class="text-center"><%= link_to 'Edit', edit_question_path(question) %></h3>
+            <h3 class="text-center"><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></h3>
+        <% end %>
+        <br>
+    <% end %>
+  
+    <% if fk == 0 and @scor != nil%>
+        <h3 class="text-center">Congratulations you have completed your quiz your final score is : <%= @scor.score %></h3>
+    <% end %>
+<br>
+<% if c_user.id == 1 %>
+    <h3 class="text-center"><%= link_to 'New Question', new_question_path %> </h3>
+<% end %>

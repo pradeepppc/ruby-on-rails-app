@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+<p id="notice"><%= notice %></p>
+
+<h1 class="text-center">Generes</h1>
+<% user = current_user %>
+<table class="table table-condensed table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Sub generes</th>
+      <% if user.id == 1%>
+        <th>Edit</th>
+        <th>Destroy</th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+    <% @generes.each do |genere| %>
+      <tr class="success">
+        <td><%= genere.name %></td>
+        <td ><%= link_to '<button class="btn btn-info btn-xs" type="button">show subgeneres</button>'.html_safe, genere %></td>
+        <% if user.id == 1%>
+          <td ><%= link_to '<button class="btn btn-info btn-xs" type="button">Edit</button>'.html_safe, edit_genere_path(genere) %></td>
+          <td ><%= link_to '<button class="btn btn-danger btn-xs" type="button">Destroy</button>'.html_safe, genere, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if user.id == 1 %>
+  <h3><%= link_to '<button class="btn btn-info btn-xs" type="button">new Genere</button>'.html_safe, new_genere_path %></h3>
+<% end %>
+</div>
+</div>
+</div>

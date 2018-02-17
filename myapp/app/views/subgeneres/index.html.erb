@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+<p id="notice"><%= notice %></p>
+
+<h1 class="text-center">Subgeneres</h1>
+<% user = current_user %>
+<table class="table table-condensed table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Genere</th>
+      <th>Start quiz</th>
+      <th>leaderboard</th>
+      <th>Status</th>
+      <% if user.id == 1%>
+        <th>edit</th>
+        <th>Destroy</th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% l = 0 %>
+    <% @subgeneres.each do |subgenere| %>
+      <tr class="success">
+        <td><%= subgenere.name %></td>
+        <td><%= subgenere.genere.name %></td>
+        <td><%= link_to '<button class="btn btn-success" type="button">Start quiz</button>'.html_safe, subgenere %></td>
+        <td class="btn btn-info"><%= link_to '<button class="btn btn-info btn-xs" type="button">Leaderboard</button>'.html_safe, :controller => 'led',:action => 'leader',:id => subgenere.id %></td>
+        <% if @acc[l] == nil%>
+          <td>Notattempted</td>
+        <% else %>
+          <td> attempted </td>
+        <% end %>
+        <% if user.id == 1%>
+
+          <td><%= link_to '<button class="btn btn-danger btn-xs" type="button">edit</button>'.html_safe, edit_subgenere_path(subgenere) %></td>
+          <td><%= link_to '<button class="btn btn-danger btn-xs" type="button">Destroy</button>'.html_safe, subgenere, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+      <% l += 1 %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if user.id == 1%>
+  <h3><%= link_to '<button class="btn btn-danger btn-xs" type="button">New subgener</button>'.html_safe, new_subgenere_path %></h3>
+<% end %>
+</div></div></div>

@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 well" >
+<%= form_with(model: genere, local: true) do |form| %>
+  <% if genere.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(genere.errors.count, "error") %> prohibited this genere from being saved:</h2>
+
+      <ul>
+      <% genere.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :genere_name %>
+  </div>
+
+  <div>
+    <%= form.submit%>
+  </div>
+
+<% end %>
+</div>
+</div>

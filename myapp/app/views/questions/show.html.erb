@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Question:</strong>
+  <%= @question.ques %>
+</p>
+
+<p>
+  <strong>Optiona:</strong>
+  <%= @question.opa %>
+</p>
+
+<p>
+  <strong>Optionb:</strong>
+  <%= @question.opb %>
+</p>
+
+<p>
+  <strong>Optionc:</strong>
+  <%= @question.opc %>
+</p>
+
+<p>
+  <strong>Optiond:</strong>
+  <%= @question.opd %>
+</p>
+
+<p>
+  <strong>Answer:</strong>
+  <%= @question.ans %>
+</p>
+
+<p>
+  <strong>Subgenere:</strong>
+  <%= @question.subgenere.name %>
+</p>
+
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', questions_path %>
